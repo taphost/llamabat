@@ -23,7 +23,7 @@ Documentazione dettagliata di ogni parametro usato nel batch, nell'ordine in cui
 | Parametro | Valore | Descrizione |
 |---|---|---|
 | `-ngl` / `--n-gpu-layers` | `9999` | Offloada il massimo numero di layer sulla GPU. 9999 = "tutto sulla GPU". Con `--fit on` i layer che non entrano vengono automaticamente spostati in RAM |
-| `-ncmoe` | `0` | Layer MoE (Mixture of Experts) tenuti in CPU. `0` = tutti in GPU. Abbassare se la VRAM è insufficiente |
+| `-ncmoe` | `0` | Layer MoE (Mixture of Experts) tenuti in CPU. `0` = tutti in GPU. Alzare se la VRAM è insufficiente |
 | `--fit on` | — | Adatta automaticamente i parametri alla VRAM disponibile. Se qualcosa non entra, scala contesto o sposta layer su RAM invece di crashare |
 | `-fitt` | `512` | Margine VRAM (MiB) che `--fit` lascia libero. Abbassato dal default (1024) per mettere più roba in GPU |
 
