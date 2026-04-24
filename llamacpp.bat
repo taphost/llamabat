@@ -9,7 +9,7 @@ echo   llama-server - Qwen3.6 35B A3B
 echo ==========================================
 echo.
 echo  Model : %MODEL%
-echo  Port  : 1234
+echo  Port  : 8000
 echo  CTX   : 131072
 echo.
 echo Premere un tasto per avviare... (CTRL+C per annullare)
