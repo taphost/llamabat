@@ -2,7 +2,7 @@
 
 
 Batch di avvio per `llama-server` (llama.cpp embedded in Unsloth Studio) ottimizzato per schede con 16GB di VRAM, 
-lo scopo è di tenere il modello **Qwen3.6-35B-A3B-UD-IQ3_XXS** per intero nella VRAM senza alcun offload dei layer 
+lo scopo è di tenere il modello **Qwen3.6-35B-A3B-UD-IQ3_XXS** (scaricato in LM Studio) per intero nella VRAM senza alcun offload dei layer 
 sulla CPU per ottenere il massimo delle prestazioni e al contempo mantenere il sistema utilizzabile senza troppi rallentamenti.
 
 
