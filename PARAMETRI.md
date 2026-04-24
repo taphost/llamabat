@@ -111,8 +111,6 @@ Documentazione dettagliata di ogni parametro usato nel batch, nell'ordine in cui
 |---|---|---|
 | `--jinja` | — | Abilita il rendering del chat template Jinja2 embedded nel GGUF. Usa automaticamente il template ufficiale del modello per i token speciali di Qwen3 |
 
-> **System prompt:** llama-server non supporta un parametro system prompt nativo. Va configurato in OpenCode tramite `agent.build.prompt` nel config JSON.
-
 ---
 
 ## 9 · Sampling
