@@ -31,14 +31,14 @@ echo.
   --mlock ^
   --prio 3 ^
   -np 1 ^
-  --cont-batching ^
   -b 2048 ^
   -ub 512 ^
   -tb 2 ^
   -t 6 ^
   -c 131072 ^
-  --cache-ram 2048 ^
-  -ctxcp 2 ^
+  --cache-ram 512 ^
+  -ctxcp 1 ^
+  -n_keep -1 ^
   --kv-unified ^
   --kv-offload ^
   -ctk q4_0 ^
@@ -53,11 +53,11 @@ echo.
   --repeat-penalty 1.0 ^
   --reasoning on ^
   --chat-template-kwargs "{\"preserve_thinking\": true}" ^
-  --spec-type ngram-simple ^
+  --spec-type ngram-mod ^
   --spec-ngram-size-n 24 ^
   --spec-ngram-min-hits 1 ^
-  --draft-min 12 ^
-  --draft-max 48 ^
+  --draft-min 48 ^
+  --draft-max 64 ^
   --metrics ^
   --port 8000
 
