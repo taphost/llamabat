@@ -14,7 +14,7 @@ Documentazione dettagliata di ogni parametro usato nel batch, nell'ordine in cui
 |---|---|---|
 | `-m` | `%MODEL%` | Path al file GGUF del modello |
 | `--no-mmproj` | — | Disabilita il proiettore multimodale (visione). Il modello è vision ma non serve per uso testuale, risparmia ~600MB VRAM |
-| `--no-mmproj-offload` | — | Impedisce l'offload del proiettore multimodale sulla GPU. Da usare insieme a `--no-mmproj` per evitare allocazioni residue |
+| `--no-mmproj-offload` | — | Impedisce l'offload del proiettore multimodale sulla GPU. Va sempre usato insieme a `--no-mmproj` — senza di esso llama.cpp può allocare residui del proiettore in VRAM anche se la visione è disabilitata |
 
 ---
 
@@ -23,7 +23,7 @@ Documentazione dettagliata di ogni parametro usato nel batch, nell'ordine in cui
 | Parametro | Valore | Descrizione |
 |---|---|---|
 | `-ngl` / `--n-gpu-layers` | `9999` | Offloada il massimo numero di layer sulla GPU. 9999 = "tutto sulla GPU". Con `--fit on` i layer che non entrano vengono automaticamente spostati in RAM |
-| `-ncmoe` | `0` | Layer MoE (Mixture of Experts) tenuti in CPU. `0` = tutti in GPU. Alzare se la VRAM è insufficiente |
+| `-ncmoe` | `0` | Layer MoE (Mixture of Experts) tenuti in CPU. `0` = tutti in GPU. **Alzare** se la VRAM è insufficiente |
 | `--fit on` | — | Adatta automaticamente i parametri alla VRAM disponibile. Se qualcosa non entra, scala contesto o sposta layer su RAM invece di crashare |
 | `-fitt` | `512` | Margine VRAM (MiB) che `--fit` lascia libero. Abbassato dal default (1024) per mettere più roba in GPU |
 
@@ -52,7 +52,7 @@ Documentazione dettagliata di ogni parametro usato nel batch, nell'ordine in cui
 |---|---|---|
 | `--prio` | `3` | Priorità del processo: 0=normale, 1=media, 2=alta, 3=realtime. Realtime garantisce massima CPU durante prefill e generazione |
 | `-np` / `--parallel` | `1` | Numero di slot paralleli (richieste simultanee). `--parallel` è l'alias esteso. Con 1 si ottimizza per uso singolo |
-| `--cont-batching` | — | Continuous batching: permette di aggiungere nuove richieste mentre la generazione è in corso, senza attendere il completamento dello slot corrente. Riduce la latenza con più client |
+| `--cont-batching` | — | Continuous batching: permette di aggiungere nuove richieste mentre la generazione è in corso, senza attendere il completamento dello slot corrente. **Con `-np 1` è praticamente inutile** — non ci sono mai richieste concorrenti da gestire. Utile solo con `-np 2+` |
 
 ---
 
@@ -72,16 +72,17 @@ Documentazione dettagliata di ogni parametro usato nel batch, nell'ordine in cui
 | Parametro | Valore | Descrizione |
 |---|---|---|
 | `-c` | `131072` | Context window massima: 131k token. Il modello supporta fino a 262144 ma raddoppiare userebbe ~2.7GB di VRAM in più per il KV cache |
-| `--cache-ram` | `2048` | Riserva 2GB di RAM per il prompt cache. Permette di ricordare il contesto senza ri-processare il prompt |
-| `-ctxcp` | `2` | Numero di slot per il prompt cache. Con 2 slot mantiene in cache i prompt di 2 conversazioni distinte |
+| `--cache-ram` | `512` | Riserva RAM (MiB) per il prompt cache. Con KV q4_0 e auto-compattazione a ~100k, 512 MiB è sufficiente per cachare il system prompt + prefill iniziale. Valori più alti (2048+) non portano benefici concreti con un solo utente |
+| `-ctxcp` | `1` | Checkpoint del KV cache. Con auto-compattazione frequente i checkpoint vengono invalidati spesso — `1` è sufficiente, `0` per disabilitare completamente |
+| `n_keep` | `-1` | Token del prompt iniziale da preservare durante la compattazione del contesto. `-1` = mantiene intero il system prompt (es. AGENTS.md) scartando i messaggi più vecchi. È il comportamento corretto per un assistant |
 
 **Guida contesto per fascia VRAM** (con KV q4_0, modello ~12GB):
-| VRAM | Contesto consigliato |
-|---|---|
-| 8–12 GB | 8k–32k |
-| 16–20 GB | 65k–131k |
-| 24–32 GB | 131k–262k |
-| 48+ GB | 262k + KV f16 |
+| VRAM | Contesto consigliato | `--cache-ram` consigliato |
+|---|---|---|
+| 8–12 GB | 8k–32k | 256 MiB |
+| 16–20 GB | 65k–131k | 512 MiB |
+| 24–32 GB | 131k–262k | 1024 MiB |
+| 48+ GB | 262k + KV f16 | 2048 MiB |
 
 ---
 
@@ -164,7 +165,7 @@ Tecnica che accelera la generazione proponendo token candidati in anticipo, veri
 | Parametro | Valore | Descrizione |
 |---|---|---|
 | `--spec-type` | `ngram-simple` | Tipo senza draft model |
-| `--spec-ngram-size-n` | `24` | Lunghezza n-gram di lookup (quanti token guardare indietro). Valori piccoli sconsigliati |
+| `--spec-ngram-size-n` | `24` | Lunghezza n-gram di lookup (quanti token guardare indietro). Valori piccoli sconsigliati. **Nota:** il JSON di `/slots` può mostrare `speculative.ngram_size_n: 1024` — è un valore interno normalizzato dal server, non indica che il parametro venga ignorato |
 | `--spec-ngram-min-hits` | `1` | Minimo occorrenze n-gram prima di usarlo come draft (rilevante per ngram-map-k) |
 | `--draft-min` | `12` | Minimo token speculativi per round. Valore ridotto perché ngram-simple è più preciso di ngram-mod |
 | `--draft-max` | `48` | Massimo token speculativi per round |
