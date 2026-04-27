@@ -38,7 +38,7 @@ echo.
   -c 131072 ^
   --cache-ram 512 ^
   -ctxcp 1 ^
-  -n_keep -1 ^
+  --keep -1 ^
   --kv-unified ^
   --kv-offload ^
   -ctk q4_0 ^
