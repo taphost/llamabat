@@ -74,7 +74,7 @@ Documentazione dettagliata di ogni parametro usato nel batch, nell'ordine in cui
 | `-c` | `131072` | Context window massima: 131k token. Il modello supporta fino a 262144 ma raddoppiare userebbe ~2.7GB di VRAM in più per il KV cache |
 | `--cache-ram` | `512` | Riserva RAM (MiB) per il prompt cache. Con KV q4_0 e auto-compattazione a ~100k, 512 MiB è sufficiente per cachare il system prompt + prefill iniziale. Valori più alti (2048+) non portano benefici concreti con un solo utente |
 | `-ctxcp` | `1` | Checkpoint del KV cache. Con auto-compattazione frequente i checkpoint vengono invalidati spesso — `1` è sufficiente, `0` per disabilitare completamente |
-| `n_keep` | `-1` | Token del prompt iniziale da preservare durante la compattazione del contesto. `-1` = mantiene intero il system prompt (es. AGENTS.md) scartando i messaggi più vecchi. È il comportamento corretto per un assistant |
+| `--keep` | `-1` | Token del prompt iniziale da preservare durante la compattazione del contesto. `-1` = mantiene intero il system prompt (es. AGENTS.md) scartando i messaggi più vecchi. È il comportamento corretto per un assistant |
 
 **Guida contesto per fascia VRAM** (con KV q4_0, modello ~12GB):
 | VRAM | Contesto consigliato | `--cache-ram` consigliato |
