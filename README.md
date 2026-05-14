@@ -1,10 +1,11 @@
-# Avvio di llama-server su Windows 10/11 con llama.cpp
+# Batch ottimizzato per llama-server su Windows 10/11
 
-> Batch di avvio per `llama-server.exe` pensato per utenti Windows 10/11 che usano **Unsloth Studio** e **LM Studio**.
+Avvia `llama-server.exe` con **LM Studio** e **Unsloth Studio**
 
 ---
 
-## 📦 LM Studio + Perché Unsloth Studio 
+## 📦 Perché LM Studio + Unsloth Studio ?
+
 
 ### LM Studio
 
@@ -35,38 +36,49 @@ Ideal per passare allo step successivo con i modelli locali:
 
 ---
 
-## 🚀 Quick Start
+## 📦 Requisiti
 
-1. Apri il file batch: `batches/llamacpp.bat`
-2. Modifica `NOMEUTENTE` nei percorsi se necessario
-3. Doppio click per avviare
-4. Accedi a `http://localhost:8000` per interagire con il modello
+Prima di iniziare, installa questi tool:
+
+- **[LM Studio](https://lmstudio.ai)** — Per scaricare i modelli `.gguf` dal Model Search
+- **[Unsloth Studio](https://unsloth.ai/docs/new/studio)** — Per aggiornare `llama.cpp` all'ultima versione
+- **GPU-Z** — Monitoraggio VRAM su Windows 10/11 ([download](https://www.techpowerup.com/gpuz/)) — utile per verificare l'occupazione dei modelli
 
 ---
 
-## 📁 Struttura del progetto
+## 📁 Struttura e Documentazione
 
 ```
 llamabat/
-├── README.md                                                           ← questo file
+├── README.md                                                           ← panoramica
 ├── docs/
-│   ├── guida-parametri-batch.md                                        ← documentazione parametri batch
-│   ├── opencode-config.md                                              ← configurazione OpenCode
-│   ├── system-prompt-lmstudio.md                                       ← esempi system prompt per LM Studio
-│   └── problemi-comuni.md                                              ← troubleshooting e soluzioni
+│   ├── [guida-parametri-batch.md](./docs/guida-parametri-batch.md)     ← spiegazione parametri batch
+│   ├── [opencode-config.md](./docs/opencode-config.md)                 ← configurazione OpenCode
+│   ├── [system-prompt-lmstudio.md](./docs/system-prompt-lmstudio.md)   ← esempi system prompt LM Studio
+│   └── [problemi-comuni.md](./docs/problemi-comuni.md)                 ← troubleshooting
 └── batches/
-    └── llamacpp.bat                                                    ← file batch pronto all'uso
+    └── [llamacpp.bat](./batches/llamacpp.bat)                          ← file batch pronto all'uso
 ```
 
 ---
 
-## 🖥️ Configurazione hardware
+## 🚀 Quick Start
+
+1. Apri **LM Studio**, vai su **Model Search** e cerca `unsloth/Qwen3.6-35B-A3B-GGUF`
+2. Seleziona il modello **Qwen3.6 35B A3B IQ3_XXS** (LM Studio scaricherà anche `mmproj-F32.gguf` in automatico)
+3. Scarica e apri `batches/llamacpp.bat` come amministratore
+4. Modifica `NOMEUTENTE` nei percorsi se necessario
+5. Doppio click per avviare
+6. Accedi a `http://localhost:8000` per interagire con il modello
+
+---
+
+## 🖥️ Requisiti hardware
 
 Il batch è ottimizzato per:
 
 - **GPU:** 16GB VRAM
 - **CPU:** 8 core
-- **Modello:** Qwen3.6-35B-A3B-UD-IQ3_XXS (~12.3 GiB, 3.05 BPW)
 
 ### Caratteristiche
 
@@ -137,14 +149,6 @@ Il valore rilevante è **generation** (t/s dopo il prefill).
 
 ---
 
-## 📖 Documentazione
-
-Per la documentazione completa di ogni parametro: [guida-parametri-batch.md](./docs/guida-parametri-batch.md)
-
-> Prossimamente: guide dedicate alla configurazione per altre configurazioni hardware.
-
----
-
 ## 🤖 Agenti CLI
 
 Se vuoi usare il modello con agenti CLI che supportano l'elaborazione di immagini:
@@ -160,6 +164,4 @@ Se vuoi usare il modello con agenti CLI che supportano l'elaborazione di immagin
 | Progetto | Link |
 |---|---|
 | [llama.cpp](https://github.com/ggml-org/llama.cpp) | `ggml-org/llama.cpp` — il motore di inferenza |
-| [Unsloth Studio](https://unsloth.ai/docs/new/studio) | Aggiorna llama.cpp all'ultima versione, ideale per finetuning |
-| [LM Studio](https://lmstudio.ai) | App semplice per scaricare e testare modelli `.gguf` |
-| [GPU-Z](https://www.techpowerup.com/gpuz/) | Monitoraggio VRAM su Windows 10/11 — utile per verificare l'occupazione dei modelli |
+
