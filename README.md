@@ -6,7 +6,7 @@
 
 
 ### LM Studio
-
+-
 LM Studio è una delle app più semplici per iniziare:
 
 **Vantaggi**
