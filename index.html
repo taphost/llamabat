@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>llamabat — Documentazione</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* ============================================
+           VARIABILI TEMA SOLARIZED (chiaro)
+           ============================================ */
+        :root {
+            --bg: #fdf6e3;
+            --sidebar-bg: #eee8d5;
+            --text: #657b83;
+            --text-dark: #586e75;
+            --link: #268bd2;
+            --border: #ddd6c1;
+            --code-bg: #fdf6e3;
+            --pre-bg: #eee8d5;
+            --active-bg: #268bd218;
+            --overlay: #00000066;
+        }
+
+        /* ============================================
+           TEMA SCURO (GitHub-style)
+           ============================================ */
+        :root[data-theme="dark"] {
+            --bg: #0d1117;
+            --sidebar-bg: #161b22;
+            --text: #c9d1d9;
+            --text-dark: #f0f6fc;
+            --link: #58a6ff;
+            --border: #30363d;
+            --code-bg: #0d1117;
+            --pre-bg: #161b22;
+            --active-bg: #1f6feb22;
+            --overlay: #000000aa;
+        }
+
+        /* ============================================
+           RESET E BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI Variable Text', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            height: 100vh;
+            font-size: 20px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           LAYOUT PRINCIPALE
+           ============================================ */
+        .sidebar {
+            width: 360px;
+            background: var(--sidebar-bg);
+            border-right: 2px solid var(--border);
+            padding: 0 0 80px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+        }
+
+        .main {
+            flex: 1;
+            padding: 48px 120px;
+            overflow-y: auto;
+        }
+
+        /* ============================================
+           HEADER SEZIONI SIDEBAR
+           ============================================ */
+        .sidebar h2 {
+            font-size: 18px;
+            color: #586e75;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 24px 0 12px;
+            padding: 8px 20px;
+            font-weight: 700;
+            text-align: center;
+            border-top: 2px solid var(--border);
+        }
+
+        /* ============================================
+           LINK NAVIGAZIONE SIDEBAR
+           ============================================ */
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            padding: 10px 14px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 8px;
+            margin: 4px 0;
+            transition: all 0.2s ease;
+            text-align: justify;
+        }
+
+        .sidebar a:hover {
+            background: var(--active-bg);
+        }
+
+        .sidebar a.active {
+            background: var(--active-bg);
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .sidebar .nav-link {
+            cursor: pointer;
+        }
+
+        .sidebar .nav-icon {
+            width: 32px;
+            text-align: center;
+            font-size: 26px;
+            filter: grayscale(100%);
+        }
+
+        /* Etichette navigazione: font size unificato */
+        .sidebar .nav-label {
+            font-size: 19px;
+        }
+
+        /* ============================================
+           LOGO GITHUB
+           ============================================ */
+        .github-logo {
+            display: flex;
+            justify-content: center;
+            margin: 8px 0 4px;
+        }
+
+        .github-logo svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--text);
+        }
+
+        /* ============================================
+           CONTENUTO PRINCIPALE
+           ============================================ */
+        .main h1 {
+            font-size: 32px;
+            margin-bottom: 32px;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .main h2 {
+            font-size: 24px;
+            margin: 40px 0 20px;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        .main h3 {
+            font-size: 20px;
+            margin: 32px 0 16px;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        .main p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .main a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .main a:hover {
+            text-decoration: underline;
+        }
+
+        .main code {
+            background: var(--pre-bg);
+            border: 1px solid var(--border);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .main pre {
+            position: relative;
+            background: var(--pre-bg);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .main pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            display: block;
+        }
+
+        .main .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--border);
+            color: var(--text-dark);
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .main .copy-btn:hover {
+            opacity: 1;
+        }
+
+        .main ul,
+        .main ol {
+            margin: 0 0 20px 28px;
+        }
+
+        .main li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        .main blockquote {
+            border-left: 3px solid var(--link);
+            padding: 12px 20px;
+            margin: 20px 0;
+            background: var(--active-bg);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .main hr {
+            display: none;
+        }
+
+        .main table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .main th,
+        .main td {
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            text-align: left;
+        }
+
+        .main th {
+            background: var(--sidebar-bg);
+            font-weight: 600;
+        }
+
+        .main img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .main strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .main em {
+            color: #93a1a1;
+        }
+
+        .main .empty {
+            color: #93a1a1;
+            font-style: italic;
+        }
+
+        /* ============================================
+           PULSANTE HAMBURGER (MOBILE)
+           ============================================ */
+        .menu-btn {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 100;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 1;
+            color: var(--text-dark);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--overlay);
+            z-index: 2;
+        }
+
+        .close-btn {
+            display: none;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text);
+            padding: 8px;
+            z-index: 5;
+        }
+
+        /* ============================================
+           PULSANTE TEMA
+           ============================================ */
+        .theme-btn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            border: none;
+            padding: 16px 32px;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text);
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* ============================================
+           RESPONSIVE MOBILE
+           ============================================ */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -360px;
+                height: 100vh;
+                width: 300px;
+                z-index: 10;
+                transition: left 0.3s ease;
+                box-shadow: 4px 0 20px #00000044;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .overlay.open {
+                display: block;
+            }
+
+            .close-btn {
+                display: block;
+            }
+
+            .main {
+                padding: 80px 24px 48px;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pulsante menu hamburger (visibile solo su mobile) -->
+    <button class="menu-btn" id="menuBtn" aria-label="Apri menu">☰</button>
+
+    <!-- Overlay scuro per mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar: navigazione laterale -->
+    <div class="sidebar" id="sidebar">
+        <!-- Pulsante chiudi sidebar (mobile) -->
+        <button class="close-btn" id="closeBtn" aria-label="Chiudi menu">✕</button>
+
+        <!-- Logo GitHub -->
+        <h2 style="margin-top: 0;">GitHub</h2>
+        <a href="https://github.com/taphost/llamabat" target="_blank" rel="noopener" class="github-logo">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.14 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+        </a>
+
+        <!-- Sezione Esecuzione -->
+        <h2>Esecuzione</h2>
+        <div id="nav-primary"></div>
+
+        <!-- Sezione Configurazione -->
+        <h2 style="margin-top: 24px;">Configurazione</h2>
+        <div id="nav-config"></div>
+
+        <!-- Sezione Supporto -->
+        <h2 style="margin-top: 24px;">Supporto</h2>
+        <div id="nav-support"></div>
+
+        <!-- Pulsante cambio tema -->
+        <button class="theme-btn" id="themeBtn" aria-label="Cambia tema"></button>
+    </div>
+
+    <!-- Contenuto principale -->
+    <div class="main">
+        <div id="content"></div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURAZIONE NAVIGAZIONE
+        // ============================================
+
+        /**
+         * Mappa icone SVG inline (stile Lucide, 24x24, fill=none stroke=currentColor)
+         */
+        const ICONS = {
+            'file-text': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>',
+            'rocket': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.25 22.25 0 0 1-3.95 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>',
+            'list': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>',
+            'settings': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
+            'info': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+            'file': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>',
+            'sun': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M12 12v4"/><path d="M4 12h2"/><path d="M18 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="m6.34 17.66-1.41 1.41"/></svg>',
+            'moon': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
+            'check': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+        };
+
+        /**
+         * File della sezione Esecuzione
+         * Contengono i file principali per avviare e configurare il server
+         */
+        const primaryFiles = [
+            { name: 'README.md', label: 'Home', icon: 'file-text' },
+            { name: 'batches/llamacpp.bat', label: 'Avvia Server', icon: 'rocket' },
+            { name: 'docs/guida-parametri-batch.md', label: 'Lista parametri', icon: 'list' }
+        ];
+
+        /**
+         * File della sezione Configurazione
+         * Documentazione per configurare strumenti esterni
+         */
+        const configFiles = [
+            { name: 'docs/opencode-config.md', label: 'Configurazione OpenCode', icon: 'settings' },
+            { name: 'docs/system-prompt-lmstudio.md', label: 'System prompt LM Studio', icon: 'file-text' }
+        ];
+
+        /**
+         * File della sezione Supporto
+         * Documentazione per risoluzione problemi
+         */
+        const supportFiles = [
+            { name: 'docs/problemi-comuni.md', label: 'Problemi comuni', icon: 'info' }
+        ];
+
+        // ============================================
+        // GESTIONE NAVIGAZIONE
+        // ============================================
+
+        /**
+         * Crea un elemento di navigazione per un file
+         * @param {Object} file - Oggetto con nome, etichetta e icona del file
+         * @returns {HTMLElement} Elemento anchor creato
+         */
+        function createNavItem(file) {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.className = 'nav-link';
+            link.dataset.file = file.name;
+
+            // Icona SVG inline
+            const icon = document.createElement('span');
+            icon.className = 'nav-icon';
+            icon.innerHTML = ICONS[file.icon] || ICONS['file'];
+            link.appendChild(icon);
+
+            // Etichetta del link
+            const label = document.createElement('span');
+            label.className = 'nav-label';
+            label.textContent = file.label;
+            link.appendChild(label);
+
+            // Gestione click
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                setActiveLink(link);
+                loadFile(file.name);
+                if (isMobile()) {
+                    closeSidebar();
+                }
+            });
+
+            return link;
+        }
+
+        /**
+         * Imposta il link attivo nella navigazione
+         * Rimuove la classe active da tutti i link e la aggiunge solo a quello corrente
+         */
+        function setActiveLink(activeLink) {
+            document.querySelectorAll('.sidebar a').forEach(el => {
+                el.classList.remove('active');
+            });
+            activeLink.classList.add('active');
+        }
+
+        /**
+         * Popola una sezione di navigazione con i file specificati
+         * @param {HTMLElement} container - Contenitore DOM dove inserire i link
+         * @param {Array} files - Array di oggetti file
+         */
+        function populateNav(container, files) {
+            files.forEach(file => {
+                container.appendChild(createNavItem(file));
+            });
+        }
+
+        // ============================================
+        // GESTIONE SIDEBAR MOBILE
+        // ============================================
+
+        /**
+         * Apre la sidebar su dispositivi mobile
+         */
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('overlay').classList.add('open');
+        }
+
+        /**
+         * Chiude la sidebar su dispositivi mobile
+         */
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('open');
+        }
+
+        /**
+         * Verifica se il dispositivo è mobile
+         * @returns {boolean} True se la larghezza è sotto la breakpoint mobile
+         */
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // ============================================
+        // GESTIONE TEMA
+        // ============================================
+
+        /**
+         * Chiave localStorage per il tema salvato
+         */
+        const THEME_STORAGE_KEY = 'theme';
+
+        /**
+         * Tema di default se nessuno è salvato
+         */
+        const DEFAULT_THEME = 'dark';
+
+        /**
+         * Applica il tema specificato
+         * @param {string} theme - 'light' o 'dark'
+         */
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem(THEME_STORAGE_KEY, theme);
+            updateThemeButton(theme);
+        }
+
+        /**
+         * Aggiorna il pulsante tema con SVG icon
+         * @param {string} theme - Tema corrente
+         */
+        function updateThemeButton(theme) {
+            const btn = document.getElementById('themeBtn');
+            btn.innerHTML = theme === 'dark' ? ICONS['sun'] : ICONS['moon'];
+        }
+
+        /**
+         * Inizializza il tema: legge da localStorage o usa il default
+         */
+        function initTheme() {
+            const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || DEFAULT_THEME;
+            applyTheme(savedTheme);
+        }
+
+        // ============================================
+        // GESTIONE CONTENUTO
+        // ============================================
+
+        /**
+         * Escape dei caratteri HTML per prevenire XSS
+         * @param {string} str - Stringa da codificare
+         * @returns {string} Stringa codificata
+         */
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        /**
+         * Aggiunge pulsanti di copia ai blocchi di codice
+         * Crea un bottone "Copia" su ogni <pre> nel contenuto principale
+         */
+        function addCopyButtons() {
+            document.querySelectorAll('.main pre').forEach(preBlock => {
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = 'Copia';
+
+                copyBtn.addEventListener('click', () => {
+                    const codeText = preBlock.querySelector('code')?.textContent || preBlock.textContent;
+                    navigator.clipboard.writeText(codeText).then(() => {
+                        copyBtn.textContent = 'Copiato!';
+                        setTimeout(() => {
+                            copyBtn.textContent = 'Copia';
+                        }, 2000);
+                    });
+                });
+
+                preBlock.appendChild(copyBtn);
+            });
+        }
+
+        /**
+         * Carica e visualizza un file nel contenuto principale
+         * @param {string} filename - Percorso del file da caricare
+         */
+        async function loadFile(filename) {
+            const contentEl = document.getElementById('content');
+            contentEl.innerHTML = '<p class="empty">Caricamento...</p>';
+
+            try {
+                const response = await fetch(filename);
+
+                if (!response.ok) {
+                    throw new Error('File non trovato');
+                }
+
+                const text = await response.text();
+
+                // Formattazione diversa per file di codice vs markdown
+                if (isCodeFile(filename)) {
+                    renderCodeFile(filename, text);
+                } else {
+                    renderMarkdown(text);
+                }
+
+                addCopyButtons();
+
+            } catch (error) {
+                renderError(filename, error.message);
+            }
+        }
+
+        /**
+         * Verifica se un file è un file di codice
+         * @param {string} filename - Nome del file
+         * @returns {boolean} True se è un file di codice
+         */
+        function isCodeFile(filename) {
+            const codeExtensions = ['.bat', '.sh', '.js', '.py'];
+            return codeExtensions.some(ext => filename.endsWith(ext));
+        }
+
+        /**
+         * Renderizza un file di codice nel contenuto principale
+         * @param {string} filename - Nome del file
+         * @param {string} text - Contenuto del file
+         */
+        function renderCodeFile(filename, text) {
+            const contentEl = document.getElementById('content');
+            const displayName = filename.split('/').pop();
+            contentEl.innerHTML = `<h1>${displayName}</h1><pre><code>${escapeHtml(text)}</code></pre>`;
+        }
+
+        /**
+         * Mappa emoji → SVG inline (stesso stile delle icone sidebar)
+         */
+        const EMOJI_TO_SVG = {
+            '\u{1F4E6}': ICONS['file-text'],   // 📦 → documento
+            '\u{2753}': ICONS['info'],          // ❓ → info
+            '\u{1F4CB}': ICONS['list'],        // 📋 → lista
+            '\u{1F4C1}': ICONS['file-text'],   // 📁 → documento
+            '\u{1F680}': ICONS['rocket'],      // 🚀 → lanciatore
+            '\u{1F5A5}': ICONS['file-text'],   // 🖥 → documento
+            '\u{1F527}': ICONS['settings'],    // 🔧 → impostazioni
+            '\u{1F3AD}': ICONS['file-text'],   // 🎭 → documento
+            '\u{1F4CA}': ICONS['list'],        // 📊 → lista
+            '\u{1F916}': ICONS['file-text'],   // 🤖 → documento
+            '\u{1F517}': ICONS['file-text'],   // 🔗 → documento
+            '\u{26A0}': ICONS['info'],         // ⚠ → info
+            '\u{1F4C4}': ICONS['file-text'],   // 📄 → documento
+            '\u{2705}': ICONS['check']         // ✅ → check
+        };
+
+        /**
+         * Regex pre-compilate per sostituzione emoji → SVG
+         */
+        const EMOJI_REGEX = Object.entries(EMOJI_TO_SVG).map(([emoji]) => ({
+            pattern: new RegExp(emoji, 'g'),
+            replacement: EMOJI_TO_SVG[emoji]
+        }));
+
+        /**
+         * Sostituisce emoji con SVG inline nello stesso stile delle icone sidebar
+         * @param {string} text - Testo di input
+         * @returns {string} Testo con emoji sostituite
+         */
+        function replaceEmojis(text) {
+            for (const { pattern, replacement } of EMOJI_REGEX) {
+                text = text.replace(pattern, replacement);
+            }
+            return text;
+        }
+
+        /**
+         * Renderizza testo markdown nel contenuto principale
+         * @param {string} markdown - Testo markdown da convertire
+         */
+        function renderMarkdown(markdown) {
+            const contentEl = document.getElementById('content');
+            contentEl.innerHTML = marked.parse(replaceEmojis(markdown));
+        }
+
+        /**
+         * Renderizza un messaggio di errore nel contenuto principale
+         * @param {string} filename - Nome del file non trovato
+         * @param {string} message - Messaggio di errore
+         */
+        function renderError(filename, message) {
+            const contentEl = document.getElementById('content');
+            contentEl.innerHTML = `
+                <h1>Errore</h1>
+                <p>Impossibile caricare <code>${filename}</code>: ${message}</p>
+                <p>Verifica che il file esista e che il server supporti CORS.</p>
+            `;
+        }
+
+        // ============================================
+        // INIZIALIZZAZIONE
+        // ============================================
+
+        /**
+         * Inizializza tutta l'applicazione
+         * Eseguito al caricamento della pagina
+         */
+        function init() {
+            // Popola le sezioni di navigazione
+            populateNav(document.getElementById('nav-primary'), primaryFiles);
+            populateNav(document.getElementById('nav-config'), configFiles);
+            populateNav(document.getElementById('nav-support'), supportFiles);
+
+            // Setup eventi sidebar mobile
+            document.getElementById('menuBtn').addEventListener('click', openSidebar);
+            document.getElementById('closeBtn').addEventListener('click', closeSidebar);
+            document.getElementById('overlay').addEventListener('click', closeSidebar);
+
+            // Setup tema
+            initTheme();
+            document.getElementById('themeBtn').addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(nextTheme);
+            });
+
+            // Carica il file iniziale
+            loadFile('README.md');
+        }
+
+        // Avvia l'applicazione quando il DOM è pronto
+        init();
+    </script>
+</body>
+</html>
