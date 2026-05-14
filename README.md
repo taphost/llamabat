@@ -30,7 +30,7 @@ Ideale per passare allo step successivo con i modelli locali:
 - Ideale per sfruttare le novità più recenti e i workflow di finetuning
 
 **Svantaggi**
-- I modelli scaricati direttamente sono blob grezzi, non `.gguf` standard
+- I modelli scaricati dan Unsloth Studio sono blob grezzi, non `.gguf` standard
 
 **Questo batch unisce il meglio di entrambi:** usa il `llama-server.exe` più recente da Unsloth Studio con un modello scaricato da LM Studio.
 
@@ -52,13 +52,18 @@ Prima di iniziare, installa questi tool:
 llamabat/
 ├── README.md                                                           ← panoramica
 ├── docs/
-│   ├── [guida-parametri-batch.md](./docs/guida-parametri-batch.md)     ← spiegazione parametri batch
-│   ├── [opencode-config.md](./docs/opencode-config.md)                 ← configurazione OpenCode
-│   ├── [system-prompt-lmstudio.md](./docs/system-prompt-lmstudio.md)   ← esempi system prompt LM Studio
-│   └── [problemi-comuni.md](./docs/problemi-comuni.md)                 ← troubleshooting
+│   ├── guida-parametri-batch.md
+│   ├── opencode-config.md
+│   ├── system-prompt-lmstudio.md
+│   └── problemi-comuni.md
 └── batches/
-    └── [llamacpp.bat](./batches/llamacpp.bat)                          ← file batch pronto all'uso
+    └── llamacpp.bat                                                    ← file batch pronto all'uso
 ```
+
+- [guida-parametri-batch.md](./docs/guida-parametri-batch.md) — Spiegazione completa di ogni parametro
+- [opencode-config.md](./docs/opencode-config.md) — Configurazione di OpenCode
+- [system-prompt-lmstudio.md](./docs/system-prompt-lmstudio.md) — Esempi system prompt per LM Studio
+- [problemi-comuni.md](./docs/problemi-comuni.md) — Troubleshooting e soluzioni
 
 ---
 
