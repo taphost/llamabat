@@ -58,7 +58,6 @@ llamabat/
     └── llamacpp.bat                                                    ← file batch pronto all'uso
 ```
 
-- [index.html](./index.html) — Pagina di navigazione interattiva con sidebar, tema dark/light e menu mobile
 - [guida-parametri-batch.md](./docs/guida-parametri-batch.md) — Spiegazione completa di ogni parametro
 - [opencode-config.md](./docs/opencode-config.md) — Configurazione di OpenCode
 - [system-prompt-lmstudio.md](./docs/system-prompt-lmstudio.md) — Esempi system prompt per LM Studio
