@@ -1,7 +1,5 @@
 # Batch ottimizzato per llama-server su Windows 10/11
 
-Avvia `llama-server.exe` con **LM Studio** e **Unsloth Studio**
-
 ---
 
 ## 📦 Perché LM Studio + Unsloth Studio ?
