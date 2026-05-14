@@ -2,12 +2,9 @@
 
 ---
 
-## 📦 Perché LM Studio + Unsloth Studio ?
+## 📦 LM Studio
 
-
-### LM Studio
--
-LM Studio è una delle app più semplici per iniziare:
+è una delle app più semplici per iniziare:
 
 **Vantaggi**
 - Scarica rapidamente i modelli in formato standard `.gguf` dal Model Search
@@ -17,7 +14,8 @@ LM Studio è una delle app più semplici per iniziare:
 **Svantaggi**
 - Basato su una versione stabile di `llama.cpp`, spesso indietro sulle ultime funzionalità
 
-### Unsloth Studio
+
+## 📦 Unsloth Studio
 
 Ideale per passare allo step successivo con i modelli locali:
 
@@ -30,8 +28,10 @@ Ideale per passare allo step successivo con i modelli locali:
 **Svantaggi**
 - I modelli scaricati dan Unsloth Studio sono blob grezzi, non `.gguf` standard
 
-**Questo setup non rappresenta la configurazione ottimale raccomandata.** 
-- L'uso di `llama.cpp` standalone con modello scaricato da Huggingface costituisce un'alternativa valida. Il file batch e la documentazione associata risultano comunque applicabili e utili anche in tale configurazione.
+
+## 📦 Perché questo setup
+
+Questo setup non rappresenta la configurazione ottimale raccomandata. L'uso di `llama.cpp` standalone con modello scaricato da Huggingface costituisce un'alternativa valida. Il file batch e la documentazione associata risultano comunque applicabili e utili anche in tale configurazione.
 
 ---
 
