@@ -29,13 +29,13 @@ Ideale per passare allo step successivo con i modelli locali:
 - I modelli scaricati dan Unsloth Studio sono blob grezzi, non `.gguf` standard
 
 
-## 📦 Perché questo setup
+## ❓ Perché questo setup
 
 Questo setup non rappresenta la configurazione ottimale raccomandata. L'uso di `llama.cpp` standalone con modello scaricato da Huggingface costituisce un'alternativa valida. Il file batch e la documentazione associata risultano comunque applicabili e utili anche in tale configurazione.
 
 ---
 
-## 📦 Requisiti
+## 📋 Requisiti
 
 - **[LM Studio](https://lmstudio.ai)** — Per scaricare i modelli `.gguf` dal Model Search
 - **[Unsloth Studio](https://unsloth.ai/docs/new/studio)** — Per aggiornare `llama.cpp` all'ultima versione
@@ -164,4 +164,20 @@ Se vuoi usare il modello con agenti CLI che supportano l'elaborazione di immagin
 ## 🔗 Riferimenti
 
 - **[llama.cpp](https://github.com/ggml-org/llama.cpp)** — `ggml-org/llama.cpp` il motore di inferenza
+- **[unsloth/Qwen3.6-35B-A3B-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF)** — Modello Qwen3.6 in formato GGUF
+- **[froggeric/Qwen-Fixed-Chat-Templates](https://huggingface.co/froggeric/Qwen-Fixed-Chat-Templates)** — Template chat ottimizzati per Qwen3.x
+
+---
+
+---
+
+## ⚠️ Disclaimer
+
+I software menzionati in questa documentazione appartengono ai rispettivi proprietari e sono utilizzati ai sensi delle relative licenze. L'autore non si assume alcuna responsabilità per eventuali danni diretti o indiretti derivanti dall'uso di `llama.cpp`, LM Studio, Unsloth Studio o di qualsiasi altro software menzionato. L'uso è da intendersi a proprio rischio.
+
+---
+
+## 📄 Licenza
+
+Questo progetto è distribuito sotto licenza MIT. Il testo completo è disponibile nel file [LICENSE](./LICENSE).
 
