@@ -169,8 +169,6 @@ Se vuoi usare il modello con agenti CLI che supportano l'elaborazione di immagin
 
 ---
 
----
-
 ## ⚠️ Disclaimer
 
 I software menzionati in questa documentazione appartengono ai rispettivi proprietari e sono utilizzati ai sensi delle relative licenze. L'autore non si assume alcuna responsabilità per eventuali danni diretti o indiretti derivanti dall'uso di `llama.cpp`, LM Studio, Unsloth Studio o di qualsiasi altro software menzionato. L'uso è da intendersi a proprio rischio.
