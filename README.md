@@ -42,7 +42,7 @@ Prima di iniziare, installa questi tool:
 
 - **[LM Studio](https://lmstudio.ai)** — Per scaricare i modelli `.gguf` dal Model Search
 - **[Unsloth Studio](https://unsloth.ai/docs/new/studio)** — Per aggiornare `llama.cpp` all'ultima versione
-- **GPU-Z** — Monitoraggio VRAM su Windows 10/11 ([download](https://www.techpowerup.com/gpuz/)) — utile per verificare l'occupazione dei modelli
+- **[GPU-Z](https://www.techpowerup.com/gpuz/)** — Monitoraggio VRAM su Windows 10/11 — utile per verificare l'occupazione dei modelli
 
 ---
 
@@ -159,14 +159,12 @@ Il valore rilevante è **generation** (t/s dopo il prefill).
 Se vuoi usare il modello con agenti CLI che supportano l'elaborazione di immagini:
 
 - **[OpenCode](https://github.com/anomalyco/opencode)** — Consigliato. Il più semplice per un beginner, carica un system prompt già pronto. Svantaggio: consuma subito più di 10k di contesto ([config](./docs/opencode-config.md))
-- **[pi.dev](https://pi.dev)** — Essenziale, dedicato agli utenti avanzati. Permette configurabilità totale ma se non usato bene può fare danni (cancellare file, ecc.)
+- **[pi.dev](https://github.com/earendil-works/pi)** — Essenziale, dedicato agli utenti avanzati. Permette configurabilità totale ma se non usato bene può fare danni (cancellare file, ecc.)
 - **[Little-Coder](https://github.com/itayinbarr/little-coder)** — Basato su pi.dev, ha guardrail per maggiore sicurezza e ottimizzazioni specifiche per Qwen3.5/3.6
 
 ---
 
 ## 🔗 Riferimenti
 
-| Progetto | Link |
-|---|---|
-| [llama.cpp](https://github.com/ggml-org/llama.cpp) | `ggml-org/llama.cpp` — il motore di inferenza |
+- **[llama.cpp](https://github.com/ggml-org/llama.cpp)** — `ggml-org/llama.cpp` il motore di inferenza
 
