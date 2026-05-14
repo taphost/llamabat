@@ -21,7 +21,7 @@ LM Studio è una delle app più semplici per iniziare:
 
 ### Unsloth Studio
 
-Ideal per passare allo step successivo con i modelli locali:
+Ideale per passare allo step successivo con i modelli locali:
 
 **Vantaggi**
 - In modalità Chat carica i migliori parametri per i modelli in automatico
