@@ -17,7 +17,7 @@ LM Studio è una delle app più semplici per iniziare:
 - La modalità Developer permette di avviare il server con un click su `http://127.0.0.1:1234`
 
 **Svantaggi**
-- Basata su una versione stabile di `llama.cpp`, spesso indietro sulle ultime funzionalità
+- Basato su una versione stabile di `llama.cpp`, spesso indietro sulle ultime funzionalità
 
 ### Unsloth Studio
 
