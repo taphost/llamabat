@@ -2,7 +2,7 @@
 
 ## Prerequisiti
 
-**npm** deve essere installato su Windows 11. Se non lo avete:
+**npm** deve essere installato su Windows 10/11. Se non lo avete:
 
 ```powershell
 npm install -g npm@latest
