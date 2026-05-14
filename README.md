@@ -30,17 +30,16 @@ Ideale per passare allo step successivo con i modelli locali:
 **Svantaggi**
 - I modelli scaricati dan Unsloth Studio sono blob grezzi, non `.gguf` standard
 
-**Questo batch unisce il meglio di entrambi:** usa il `llama-server.exe` più recente da Unsloth Studio con un modello scaricato da LM Studio.
+**Questo setup non rappresenta la configurazione ottimale raccomandata.** 
+- L'uso di `llama.cpp` standalone con modello scaricato da Huggingface costituisce un'alternativa valida. Il file batch e la documentazione associata risultano comunque applicabili e utili anche in tale configurazione.
 
 ---
 
 ## 📦 Requisiti
 
-Prima di iniziare, installa questi tool:
-
 - **[LM Studio](https://lmstudio.ai)** — Per scaricare i modelli `.gguf` dal Model Search
 - **[Unsloth Studio](https://unsloth.ai/docs/new/studio)** — Per aggiornare `llama.cpp` all'ultima versione
-- **[GPU-Z](https://www.techpowerup.com/gpuz/)** — Monitoraggio VRAM su Windows 10/11 — utile per verificare l'occupazione dei modelli
+- **[GPU-Z](https://www.techpowerup.com/gpuz/)** — Strumento di monitoraggio hardware per GPU NVIDIA e AMD. Consente di verificare in tempo reale l'utilizzo della VRAM, frequenza del clock e temperatura durante l'esecuzione del modello.
 
 ---
 
