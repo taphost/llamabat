@@ -51,6 +51,7 @@ llamabat/
 ├── index.html                                                          ← documentazione interattiva
 ├── docs/
 │   ├── guida-parametri-batch.md
+│   ├── info-index.md
 │   ├── opencode-config.md
 │   ├── system-prompt-lmstudio.md
 │   └── problemi-comuni.md

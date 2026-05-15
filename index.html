@@ -108,10 +108,9 @@
             display: flex;
             align-items: center;
             gap: 28px;
-            padding: 10px 14px;
+          padding: 10px 14px;
             color: var(--text);
             text-decoration: none;
-            font-size: 15px;
             border-radius: 8px;
             margin: 4px 0;
             transition: all 0.2s ease;
@@ -138,7 +137,7 @@
         }
 
         .sidebar .nav-label {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         /* ============================================
@@ -315,6 +314,11 @@
             z-index: 100;
             gap: 8px;
             align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .topbar-group.autohide {
+            opacity: 0;
+            pointer-events: none;
         }
         .topbar-group-left  { left: 16px; }
         .topbar-group-right { right: 16px; }
@@ -381,7 +385,7 @@
         /* ============================================
            RESPONSIVE MOBILE
            ============================================ */
-        @media (max-width: 768px) {
+       @media (max-width: 768px) {
             .topbar-group {
                 display: flex;
             }
@@ -415,6 +419,28 @@
             }
 
             .theme-btn { display: none; }
+
+            .main table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            ::-webkit-scrollbar {
+                width: 12px;
+                height: 12px;
+            }
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: rgba(128, 128, 128, 0.3);
+                border-radius: 3px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgba(128, 128, 128, 0.5);
+            }
         }
     </style>
 </head>
@@ -482,27 +508,31 @@
             'list': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>',
             'settings': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
             'info': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
-            'file': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>',
+            'bug': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a3 3 0 0 1 6 0v3c0 3.3-2.7 6-6 6Z"/><path d="M12 20c3.3 0 6-2.7 6-6v-3a3 3 0 0 0-6 0v3c0 3.3 2.7 6 6 6Z"/><path d="M2 13h2"/><path d="M20 13h2"/><path d="m9 22 3-3 3 3"/><path d="M6 8h2"/><path d="M16 8h2"/></svg>',
+'file': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>',
             'sun': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M12 12v4"/><path d="M4 12h2"/><path d="M18 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="m6.34 17.66-1.41 1.41"/></svg>',
             'moon': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
             'check': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
             'maximize': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>',
-            'minimize': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>'
+            'minimize': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>',
+            'octagon': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.1 2.188a2.1 2.1 0 0 1 1.8 0l7.8 4.8a2.1 2.1 0 0 1 1.1 1.8v9.6a2.1 2.1 0 0 1-1.1 1.8l-7.8 4.8a2.1 2.1 0 0 1-1.8 0l-7.8-4.8a2.1 2.1 0 0 1-1.1-1.8V8.788a2.1 2.1 0 0 1 1.1-1.8z"/></svg>',
+            'activity': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'
         };
 
         const primaryFiles = [
             { name: 'README.md', label: 'Home', icon: 'file-text' },
             { name: 'batches/llamacpp.bat', label: 'Avvia Server', icon: 'rocket' },
-            { name: 'docs/guida-parametri-batch.md', label: 'Lista parametri', icon: 'list' }
+            { name: 'docs/guida-parametri-batch.md', label: 'Lista Parametri', icon: 'list' }
         ];
 
         const configFiles = [
             { name: 'docs/opencode-config.md', label: 'Configurazione OpenCode', icon: 'settings' },
-            { name: 'docs/system-prompt-lmstudio.md', label: 'System prompt LM Studio', icon: 'file-text' }
+            { name: 'docs/system-prompt-lmstudio.md', label: 'System Prompt LM Studio', icon: 'file-text' }
         ];
 
         const supportFiles = [
-            { name: 'docs/problemi-comuni.md', label: 'Problemi comuni', icon: 'info' }
+            { name: 'docs/problemi-comuni.md', label: 'Problemi Comuni', icon: 'activity' },
+            { name: 'docs/info-index.md', label: 'Info Pagina', icon: 'info' }
         ];
 
         // ============================================
@@ -715,6 +745,26 @@
         }
 
         // ============================================
+        // AUTO-HIDE TOPBAR MOBILE
+        // ============================================
+
+        const AUTOHIDE_DELAY = 3000;
+        let autohideTimer = null;
+
+        function startAutohide() {
+            clearTimeout(autohideTimer);
+            document.querySelectorAll('.topbar-group').forEach(el => el.classList.remove('autohide'));
+            autohideTimer = setTimeout(() => {
+                document.querySelectorAll('.topbar-group').forEach(el => el.classList.add('autohide'));
+            }, AUTOHIDE_DELAY);
+        }
+
+        function showTopbar() {
+            document.querySelectorAll('.topbar-group').forEach(el => el.classList.remove('autohide'));
+            startAutohide();
+        }
+
+        // ============================================
         // INIZIALIZZAZIONE
         // ============================================
 
@@ -760,6 +810,16 @@
 
             const firstLink = document.querySelector('#nav-primary .nav-link');
             if (firstLink) setActiveLink(firstLink);
+
+            // Auto-hide topbar
+            const TOP_ZONE_HEIGHT = 80;
+            document.addEventListener('click', (e) => {
+                if (e.clientY <= TOP_ZONE_HEIGHT) {
+                    showTopbar();
+                }
+            });
+
+            startAutohide();
 
             loadFile('README.md');
         });

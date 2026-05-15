@@ -2,7 +2,9 @@
 
 ## Prerequisiti
 
-**npm** deve essere installato su Windows 10/11. Se non lo avete:
+**Node.js** deve essere installato su Windows 10/11 (include npm). Scaricalo da [nodejs.org](https://nodejs.org) — scegli la versione LTS.
+
+Se non hai npm:
 
 ```powershell
 npm install -g npm@latest
