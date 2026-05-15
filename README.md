@@ -48,7 +48,7 @@ Questo setup non rappresenta la configurazione ottimale raccomandata. L'uso di `
 ```
 llamabat/
 ├── README.md                                                           ← panoramica
-├── index.html                                                          ← navigazione documentazione interattiva
+├── index.html                                                          ← documentazione interattiva
 ├── docs/
 │   ├── guida-parametri-batch.md
 │   ├── opencode-config.md
