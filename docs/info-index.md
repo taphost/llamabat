@@ -29,11 +29,30 @@ La pagina è divisa in 3 sezioni di navigazione nella sidebar:
 - Rendering file di codice con evidenziazione basica
 - Pulsanti "Copia" su ogni blocco di codice
 
+### Navigazione tastiera
+- **Frecce Su/Giù** — Navigano tra i link della sidebar
+- **Enter/Space** — Attivano il link selezionato
+- **`:focus-visible`** — Outline visibile solo per navigazione da tastiera
+
 ### Tema
 - Tema chiaro (Solarized) e scuro (GitHub-style)
 - Preferenza salvata in `localStorage`
 - Tema scuro come default
+- Bottone tema nella topbar (visibile su tutte le dimensioni)
 - Icone SVG inline (Lucide-style) per tema toggle
+
+### Topbar
+- **Desktop**: bottone tema sempre visibile
+- **Mobile**: hamburger + tema + fullscreen con auto-hide (svanisce dopo 3s)
+- Click nella zona superiore (80px) per riapparire su mobile
+
+### Accessibilità
+- `role="navigation"` sulla sidebar con `aria-label="Navigazione"`
+- `role="menu"` sui contenitori di navigazione
+- `aria-current="page"` sul link attivo
+- `aria-label` su tutti i pulsanti della topbar
+- Link GitHub con `<title>` e `aria-label`
+- Navigazione completa da tastiera
 
 ### Sicurezza
 - Sanitizzazione HTML con DOMPurify
@@ -43,14 +62,12 @@ La pagina è divisa in 3 sezioni di navigazione nella sidebar:
 ### Responsive
 - Sidebar collassabile su mobile con hamburger menu
 - Overlay scuro per chiudere la sidebar
-- Topbar mobile con hamburger, tema e fullscreen
 - Layout flex con contenuto sidebar scrollabile
 - Tabelle scrollabili orizzontalmente su mobile
-- Scrollbar mobile più sottile e semi-trasparente
-- Topbar auto-hide su mobile (svanisce dopo 3s, click zona top per riapparire)
+- Scrollbar personalizzato globale (desktop + mobile)
 
 ### Fullscreen
-- Toggle schermo intero da topbar mobile
+- Toggle schermo intero da topbar (solo mobile)
 - Icona dinamica (espandi/riduci)
 
 ## Dipendenze esterne
@@ -74,7 +91,6 @@ oppure usa estensioni VS Code come "Live Server".
 
 ## Note tecniche
 
-- I percorsi dei file sono relativi a `index.html`
+  - I percorsi dei file sono relativi a `index.html`
 - Su file system puro (file://) alcuni file potrebbero non caricarsi per CORS
-- `white-space: pre-wrap` rimosso dai paragrafi per evitare spaziatura extra
 - Font-size base: 16px per compatibilità mobile
